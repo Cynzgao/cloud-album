@@ -5,7 +5,7 @@ phases:
       python: 3.7
   build:
     commands:
-      #- pip install --upgrade pip
+      - pip install --upgrade pip
       #- pip install pipenv --user
       - pip install aws-sam-cli
       - sam build
