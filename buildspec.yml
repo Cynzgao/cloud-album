@@ -5,9 +5,9 @@ phases:
       python: 3.8
   build:
     commands:
-      - pip install --upgrade pip
-      - pip install pipenv --user
-      - pipenv install awscli aws-sam-cli
+      #- pip install --upgrade pip
+      #- pip install pipenv --user
+      - pip install aws-sam-cli
       - sam build
       - export BUCKET=hw3-pipeline-bucket
       - sam package --s3-bucket $BUCKET --output-template-file outputtemplate.yml
