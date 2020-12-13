@@ -1,0 +1,83 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <script type="text/javascript" src="lib/axios/dist/axios.standalone.js"></script>
+    <script type="text/javascript" src="lib/CryptoJS/rollups/hmac-sha256.js"></script>
+    <script type="text/javascript" src="lib/CryptoJS/rollups/sha256.js"></script>
+    <script type="text/javascript" src="lib/CryptoJS/components/hmac.js"></script>
+    <script type="text/javascript" src="lib/CryptoJS/components/enc-base64.js"></script>
+    <script type="text/javascript" src="lib/url-template/url-template.js"></script>
+    <script type="text/javascript" src="lib/apiGatewayCore/sigV4Client.js"></script>
+    <script type="text/javascript" src="lib/apiGatewayCore/apiGatewayClient.js"></script>
+    <script type="text/javascript" src="lib/apiGatewayCore/simpleHttpClient.js"></script>
+    <script type="text/javascript" src="lib/apiGatewayCore/utils.js"></script>
+    <script type="text/javascript" src="apigClient.js"></script>
+    <script type="text/javascript" src="https://sdk.amazonaws.com/js/aws-sdk-2.283.1.min.js"></script>
+    <script type="text/javascript" src="photo-script.js"></script>
+  </head>
+  <body>
+    <script src="https://sdk.amazonaws.com/js/aws-sdk-2.1.24.min.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<!-- <script type="text/javascript">
+var albumBucketName = "photos-hw3b2";
+var bucketRegion = "us-east-1";
+var IdentityPoolId = "us-east-1:1d1dcf51-2480-469d-bf87-510a2fad15e7";
+
+AWS.config.update({
+  region: bucketRegion,
+  credentials: new AWS.CognitoIdentityCredentials({
+    IdentityPoolId: IdentityPoolId
+  })
+});
+
+var s3 = new AWS.S3({
+                apiVersion: '2006-03-01',
+                params: {Bucket: albumBucketName}
+        });
+</script> -->
+    <div class="container" style="width:800px; margin:0 auto;">
+      <h1 align="center">PHOTO ALBUM</h1>
+      <hr>
+      <div class="search-input-box" style = "margin:20px;">
+          <input type="text" id="search-input" placeholder="Type in words to search">
+          <button id="voice-search-button" onclick="voiceSearchPhoto()">Voice Search</button>
+          <button id="text-search-button" onclick="textSearchPhoto()">Search</button>
+      </div>
+      <div id="output-box">
+      </div>
+      <div class="upload-box" style = "margin:20px;">
+          <label><strong>Upload pictures:</strong></label>
+      <div class="upload-input-box" style = "margin:20px;">
+            <input type="file" id="fileUpload">
+          <button id="upload-button" onclick="s3upload()">Upload</button>
+      </div>
+    </div>
+<!--   <script type="text/javascript">
+function s3upload() {
+   var files = document.getElementById('fileUpload').files;
+   if (files) 
+   {
+     var file = files[0];
+     var fileName = file.name;
+     // var filePath = 'my-first-bucket-path/' + fileName;
+    // var fileUrl = 'https://' + bucketRegion + '.amazonaws.com/my-    first-bucket/' +  filePath;
+     s3.upload({
+        Key: fileName,
+        Body: file,
+        ACL: 'public-read'
+        }, function(err, data) {
+        if(err) {
+        reject('error');
+        }
+        alert('Successfully Uploaded!');
+        }).on('httpUploadProgress', function (progress) {
+        var uploaded = parseInt((progress.loaded * 100) / progress.total);
+        $("progress").attr('value', uploaded);
+      });
+   }
+};
+</script> -->
+  </body>
+</html>

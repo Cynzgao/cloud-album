@@ -15,7 +15,7 @@ def lambda_handler(event, context):
     # given search query q
     print(event)
     text = event["params"]['q']
-    #print(text)
+    print(text)
 
     '''
     # TODO: check LEX part
@@ -25,7 +25,6 @@ def lambda_handler(event, context):
         userId = '',
         inputText = text
         )
-    '''
     lex_response = {"slots": {"key1": "raccoon"}}
     print(lex_response)
     if 'slots' in lex_response:
@@ -49,15 +48,16 @@ def lambda_handler(event, context):
         }
 
     return response
-
+    '''
+    output = es_search([text])
+    print("output is:", output)
+    return {
+            "statusCode": 200,
+            "headers": {"Access-Control-Allow-Origin":"*","Content-Type":"application/json"},
+            "body": json.dumps(output),
+        }
 
 def es_search(key):
-    #I return a list of names as below to test the front end and it works fine
-    # return {
-    #     "statusCode":200,
-    #     "body":json.dumps(["cat.jpeg","WechatIMG544.jpeg"])
-    # }
-
     headers = {'content-type': 'application/json'}
     credentials = boto3.Session().get_credentials()
     awsauth = AWS4Auth(credentials.access_key, credentials.secret_key, region, 'es', session_token=credentials.token)
@@ -71,8 +71,6 @@ def es_search(key):
             r = requests.get(url, auth = awsauth)
             response.append(r.json())
 
-
-
     res = []
     # if there are hits, retrieve from s3 bucket 2
     for r in response:
@@ -80,11 +78,10 @@ def es_search(key):
             hit = r['hits']['hits']
             print(hit)
             if hit:
-                print(hit[0])
-                path = r['hits']['hits'][0]['_source']['objectKey']
-                #object_url = "https://s3.us-east-1.amazonaws.com/photos-hw3b2/" + path
-                res.append(path)
-
+                for h in hit:
+                    path = h['_source']['objectKey']
+                    #object_url = "https://s3.us-east-1.amazonaws.com/photos-hw3b2/" + path
+                    res.append(path)
 
     print(res)
 
