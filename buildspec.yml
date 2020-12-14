@@ -5,12 +5,12 @@ phases:
       python: 3.8
   build:
     commands:
-      - pip install pip==19.2.3
+      #- pip install pip==19.2.3
       #- pip install pipenv --user
-      - pip install aws-sam-cli
-      - sam build
+      #- pip install aws-sam-cli
+      #- sam build
       - export BUCKET=hw3-pipeline-bucket
-      - sam package --s3-bucket $BUCKET --output-template-file outputtemplate.yml
+      - aws cloudformation package --template-file template.yml --s3-bucket $BUCKET --output-template-file outputtemplate.yml
 
       #- pipenv run sam package --template-file template.yml --s3-bucket hw3-pipeline-bucket  --output-template-file outputtemplate.yml
 artifacts:
