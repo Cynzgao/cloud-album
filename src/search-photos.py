@@ -10,6 +10,7 @@ album = s3.Bucket('photos-hw3b2')
 
 def lambda_handler(event, context):
     print("hi")
+    print("test")
     # initialize lex
     print(context)
     lex_client = boto3.client("lex-runtime")
